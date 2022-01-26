@@ -182,8 +182,40 @@ function LoadNewWordle(msg)
         csv.toArrays(fileContent, {}, (err, data) => 
         {
             if (err) { console.log(err) }
+            console.log(data.length);
+            if(data.length==0)
+            {
+                console.log("no data");
+                data[0]=[
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'user',
+                    'wordOfTheDay',
+                    'canGuess',
+                    'lastGuessDate',
+                    'guesses',
+                    'wins',
+                    'games',
+                    'hasCompletedToday'
+                  ];
+            }
+            console.log(data.length);
+
             for (let i = 1, len = data.length; i < len; i++) 
             {
+                console.log(data[i]);
                 if(data[i][0]==msg.author.id)
                 {
                     if(PlayedToday(data[i][3]))
@@ -210,10 +242,11 @@ function LoadNewWordle(msg)
                     return;
                 }
             }
+            
             //create new entry
-            data[data.length] = [msg.author.id,GetAnswer(),'false',GetTodaysDate(),'',0,0,0,false]
+            data.push([msg.author.id,GetAnswer(),'false',GetTodaysDate(),,0,0,0,false]);
             writeToCSVFile(data);
-            LoadGame(msg,data[data.length][4],data[data.length][1]);
+            LoadGame(msg,"","");
     })})
 }
 function PlayWordle(msg)
@@ -224,6 +257,33 @@ function PlayWordle(msg)
         csv.toArrays(fileContent, {}, (err, data) => 
         {
             if (err) { console.log(err) }
+            if(data.length==0)
+            {
+                data[0]=[
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'data:text/csv;charset=utf-8',
+                    'user',
+                    'wordOfTheDay',
+                    'canGuess',
+                    'lastGuessDate',
+                    'guesses',
+                    'wins',
+                    'games',
+                    'hasCompletedToday'
+                  ];
+            }
             for (let i = 1, len = data.length; i < len; i++) 
             {
 
@@ -275,7 +335,7 @@ function PlayWordle(msg)
                     return;
                 }
             }
-            console.log("you are not in the db");
+            msg.reply("You have not started a game yet today")
         })})
 }
 function ShowWordleStats(msg)
