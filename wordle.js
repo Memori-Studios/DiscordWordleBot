@@ -1,23 +1,3 @@
-// ADD TO THE TOP OF YOUR MAIN FILE
-// const Wordle = require("./wordle.js");
-
-//ADD TO YOUR MESSAGE FUNCTION IN YOUR MAIN FILE
-//loads a new wordle game
-// if(msg.content.includes("!playwordle"))
-// {
-//     Wordle.LoadNewWordle(msg);
-// }
-// //makes a guess in a wordle game
-// if(msg.content.includes("!guess"))
-// {
-//     Wordle.PlayWordle(msg);
-// }
-// //shows your stats
-// if(msg.content.includes("!wordlestats"))
-// {
-//     Wordle.ShowWordleStats(msg);
-// }
-
 const { MessageAttachment } = require('discord.js');
 const fs = require('fs');
 var csv = require('jquery-csv');
